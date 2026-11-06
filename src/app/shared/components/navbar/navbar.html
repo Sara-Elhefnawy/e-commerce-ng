@@ -1,0 +1,164 @@
+<nav class="bg-gray-200 top w-full z-20 top-0 start-0">
+  <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between p-4">
+    <!-- Logo and mobile menu button -->
+    <div class="flex items-center">
+      <a class="flex items-center space-x-3 rtl:space-x-reverse">
+        <img src="./images/freshcart-logo.svg" class="h-8" alt="FreshCart Logo">
+      </a>
+    </div>
+
+    <!-- Right side items (login/social) - Always visible -->
+    <div class="flex items-center md:order-2 space-x-3 rtl:space-x-reverse">
+      <!-- Login/Signup/Logout items -->
+      <div class="font-medium md:flex">
+        <ul class="flex flex-row space-x-4 rtl:space-x-reverse">
+          @if(isLoggedIn){
+          <li>
+            <a (click)="signOut()"
+              class="text-gray-900 cursor-pointer font-medium text-sm px-3 py-2 rounded hover:bg-gray-100">{{'navbar.LogOut'
+              | translate}}</a>
+          </li>
+          }
+          @if(!isLoggedIn){
+          <li>
+            <a routerLink="/signUp"
+              class="text-gray-900 font-medium text-sm px-3 py-2 rounded hover:bg-gray-100">{{'navbar.SignUp' |
+              translate}}</a>
+          </li>
+          <li>
+            <a routerLink="/logIn"
+              class="text-gray-900 font-medium text-sm px-3 py-2 rounded hover:bg-gray-100">{{'navbar.LogIn' |
+              translate}}</a>
+          </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Social icons - Hidden on mobile -->
+      <div class="hidden md:block">
+        <ul class="flex flex-row space-x-2 rtl:space-x-reverse">
+          <li class="text-gray-500 hover:text-green-600 duration-300">
+            <a class="w-5 h-5 flex items-center justify-center">
+              <i class="fab fa-facebook text-lg"></i>
+            </a>
+          </li>
+          <li class="text-gray-500 hover:text-green-600 duration-300">
+            <a class="w-5 h-5 flex items-center justify-center">
+              <i class="fab fa-twitter text-lg"></i>
+            </a>
+          </li>
+          <li class="text-gray-500 hover:text-green-600 duration-300">
+            <a class="w-5 h-5 flex items-center justify-center">
+              <i class="fab fa-linkedin text-lg"></i>
+            </a>
+          </li>
+          <li class="text-gray-500 hover:text-green-600 duration-300">
+            <a class="w-5 h-5 flex items-center rtl:me-2 justify-center">
+              <i class="fab fa-tiktok text-lg"></i>
+            </a>
+          </li>
+          <li class="text-gray-500 hover:text-green-600 duration-300">
+            <a class="w-5 h-5 flex items-center justify-center">
+              <i class="fab fa-youtube text-lg"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Mobile menu button -->
+      <button data-collapse-toggle="navbar-sticky" type="button"
+        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+        aria-controls="navbar-sticky" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M1 1h15M1 7h15M1 13h15" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Main navbar content - Will expand below on mobile -->
+    <div class="hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+      <!-- Navigation menu -->
+      <ul
+        class="flex flex-col items-center p-4 md:p-0 mt-4 font-medium rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0">
+        <li>
+          <a routerLink="/"
+            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0">{{'navbar.Home'
+            | translate}}</a>
+        </li>
+        <li>
+          <a routerLink="/products"
+            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0">{{'navbar.Products'
+            | translate}}</a>
+        </li>
+        <li>
+          <a routerLink="/categories"
+            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0">{{'navbar.Category'
+            | translate}}</a>
+        </li>
+        <li>
+          <a routerLink="/brands"
+            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0">{{'navbar.Brand'
+            | translate}}</a>
+        </li>
+        <li>
+          <a class="block py-2 px-3 cursor-pointer text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0"
+            (click)="_MyTranslateService.changeLang('ar')">{{'navbar.AR' | translate}}</a>
+        </li>
+        <li>
+          <a class="block rtl:ms-4 py-2 px-3 cursor-pointer text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0"
+            (click)="_MyTranslateService.changeLang('en')">{{'navbar.EN' | translate}}</a>
+        </li>
+
+        <!-- Cart icon (only when logged in) -->
+        @if(isLoggedIn){
+        <li class="flex items-center">
+          <a routerLink="/cart"
+            class="block py-2 px-3 text-gray-900 cursor-pointer rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0">
+            <button type="button"
+              class="relative inline-flex items-center cursor-pointer p-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span class="sr-only">Cart</span>
+              <div
+                class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2">
+                {{cartNumber}}
+              </div>
+            </button>
+          </a>
+        </li>
+
+        <li class="flex items-center md:rtl:ms-4">
+          <a routerLink="/wishList"
+            class="block py-2 px-3 text-gray-900 cursor-pointer rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0">
+            <button type="button"
+              class="relative inline-flex items-center cursor-pointer p-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800">
+              <i class="fa-solid fa-heart"></i>
+              <span class="sr-only">WishList</span>
+              <div
+                class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2">
+                {{wishListNumber}}
+              </div>
+            </button>
+          </a>
+        </li>
+
+        <li class="flex items-center md:rtl:ms-4">
+          <a routerLink="/allorders"
+            class="block py-2 px-3 text-gray-900 cursor-pointer rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0">
+            <button type="button"
+              class="relative inline-flex items-center cursor-pointer p-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800">
+              <i class="fa-regular fa-credit-card"></i>
+              <span class="sr-only">All Orders</span>
+              <div
+                class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2">
+                {{orderNumber}}
+              </div>
+            </button>
+          </a>
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>
